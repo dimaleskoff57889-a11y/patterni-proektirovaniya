@@ -24,19 +24,23 @@ class Stack:
     """
 
     def __init__(self):
-        raise NotImplementedError("Реализуйте Stack.__init__")
+        self._items = []
 
     def push(self, item):
-        raise NotImplementedError("Реализуйте Stack.push")
+        self._items.append(item)
 
     def pop(self):
-        raise NotImplementedError("Реализуйте Stack.pop")
+        if self.is_empty():
+            raise IndexError("Стек пуст")
+        return self._items.pop()
 
     def peek(self):
-        raise NotImplementedError("Реализуйте Stack.peek")
+        if self.is_empty():
+            raise IndexError("Стек пуст")
+        return self._items[-1]
 
     def is_empty(self):
-        raise NotImplementedError("Реализуйте Stack.is_empty")
+        return len(self._items) == 0
 
 
 class Queue:
@@ -60,16 +64,18 @@ class Queue:
     """
 
     def __init__(self):
-        raise NotImplementedError("Реализуйте Queue.__init__")
+        self._items = []
 
     def enqueue(self, item):
-        raise NotImplementedError("Реализуйте Queue.enqueue")
+        self._items.append(item)
 
     def dequeue(self):
-        raise NotImplementedError("Реализуйте Queue.dequeue")
+        if self.size() == 0:
+            raise IndexError("Очередь пуста")
+        return self._items.pop(0)
 
     def size(self):
-        raise NotImplementedError("Реализуйте Queue.size")
+        return len(self._items)
 
 
 class Book:
@@ -84,7 +90,8 @@ class Book:
     """
 
     def __init__(self, title, author):
-        raise NotImplementedError("Реализуйте Book.__init__")
+        self.title = title
+        self.author = author
 
 
 class Library:
@@ -107,13 +114,13 @@ class Library:
     """
 
     def __init__(self):
-        raise NotImplementedError("Реализуйте Library.__init__")
+        self._books = []
 
     def add(self, book):
-        raise NotImplementedError("Реализуйте Library.add")
+        self._books.append(book)
 
     def titles(self):
-        raise NotImplementedError("Реализуйте Library.titles")
+        return [book.title for book in self._books]
 
     def by_author(self, author):
-        raise NotImplementedError("Реализуйте Library.by_author")
+        return [book.title for book in self._books if book.author == author]

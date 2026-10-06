@@ -12,7 +12,14 @@ def hw_11(n):
         list(hw_11(2)) == [2]
         list(hw_11(1)) == []
     """
-    raise NotImplementedError("Реализуйте hw_11")
+    for num in range(2, n + 1):
+        is_prime = True
+        for i in range(2, int(num ** 0.5) + 1):
+            if num % i == 0:
+                is_prime = False
+                break
+        if is_prime:
+            yield num
 
 
 def hw_12(items, times):
@@ -27,7 +34,8 @@ def hw_12(items, times):
         list(hw_12([1, 2], 0)) == []
         list(hw_12([], 5)) == []
     """
-    raise NotImplementedError("Реализуйте hw_12")
+    for _ in range(times):
+        yield from items
 
 
 def hw_13(items, size):
@@ -41,7 +49,8 @@ def hw_13(items, size):
         list(hw_13([1, 2], 5)) == [[1, 2]]
         list(hw_13([], 3)) == []
     """
-    raise NotImplementedError("Реализуйте hw_13")
+    for i in range(0, len(items), size):
+        yield items[i:i + size]
 
 
 def hw_14(items):
@@ -57,4 +66,5 @@ def hw_14(items):
         list(hw_14([1])) == []
         list(hw_14([])) == []
     """
-    raise NotImplementedError("Реализуйте hw_14")
+    for i in range(len(items) - 1):
+        yield (items[i], items[i + 1])

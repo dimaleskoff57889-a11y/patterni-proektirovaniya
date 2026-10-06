@@ -44,7 +44,7 @@ def hw_03(tag, *items, sep=", "):
         hw_03("фрукты", "яблоко", "груша", sep="; ") == "фрукты: яблоко; груша"
         hw_03("пусто") == "пусто: "
     """
-    raise NotImplementedError("Реализуйте hw_03")
+    return f"{tag}: {sep.join(items)}"
 
 
 def hw_04(prefix, **kwargs):
@@ -58,4 +58,4 @@ def hw_04(prefix, **kwargs):
             == {"dev_host": "localhost"}
         hw_04("x_") == {}
     """
-    raise NotImplementedError("Реализуйте hw_04")
+    return {k: v for k, v in kwargs.items() if k.startswith(prefix)}

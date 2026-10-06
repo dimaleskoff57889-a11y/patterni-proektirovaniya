@@ -12,7 +12,10 @@ def hw_05(func, items):
         hw_05(lambda x: x * 2, [1, 2, 3]) == [2, 4, 6]
         hw_05(str, []) == []
     """
-    raise NotImplementedError("Реализуйте hw_05")
+    result = []
+    for item in items:
+        result.append(func(item))
+    return result
 
 
 def hw_06(predicate, items):
@@ -26,7 +29,11 @@ def hw_06(predicate, items):
         hw_06(str.isupper, ["A", "b", "C"]) == ["A", "C"]
         hw_06(bool, []) == []
     """
-    raise NotImplementedError("Реализуйте hw_06")
+    result = []
+    for item in items:
+        if predicate(item):
+            result.append(item)
+    return result
 
 
 def hw_07(words):
@@ -40,4 +47,4 @@ def hw_07(words):
         hw_07(["дом", "кот", "жук"]) == ["жук", "дом", "кот"]   # к < м < т
         hw_07(["я", "а"]) == ["а", "я"]
     """
-    raise NotImplementedError("Реализуйте hw_07")
+    return sorted(words, key=lambda x: (x[-1], x))
