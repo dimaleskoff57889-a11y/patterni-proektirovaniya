@@ -59,7 +59,10 @@ def task_22():
         from itertools import islice
         list(islice(task_22(), 8)) == [0, 1, 1, 2, 3, 5, 8, 13]
     """
-    raise NotImplementedError("Реализуйте task_22")
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a + b
 
 
 def task_23(items):
@@ -73,7 +76,11 @@ def task_23(items):
         list(task_23(["a", "a", "a"])) == ["a"]
         list(task_23([])) == []
     """
-    raise NotImplementedError("Реализуйте task_23")
+    seen = set()
+    for item in items:
+        if item not in seen:
+            seen.add(item)
+            yield item
 
 
 def task_24(nested):
@@ -87,4 +94,5 @@ def task_24(nested):
         list(task_24([])) == []
         list(task_24([[], []])) == []
     """
-    raise NotImplementedError("Реализуйте task_24")
+    for inner in nested:
+        yield from inner

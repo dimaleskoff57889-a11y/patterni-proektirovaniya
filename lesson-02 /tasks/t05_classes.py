@@ -16,10 +16,11 @@ class Dog:
     """
 
     def __init__(self, name, breed):
-        raise NotImplementedError("Реализуйте Dog.__init__")
+        self.name = name
+        self.breed = breed
 
     def bark(self):
-        raise NotImplementedError("Реализуйте Dog.bark")
+        return f"Гав! Я {self.name}, порода {self.breed}"
 
 
 class Robot:
@@ -44,7 +45,8 @@ class Robot:
     count = 0
 
     def __init__(self):
-        raise NotImplementedError("Реализуйте Robot.__init__")
+        Robot.count += 1
+        self.serial = Robot.count
 
 
 class Settings:
@@ -65,10 +67,11 @@ class Settings:
     """
 
     def __init__(self, **options):
-        raise NotImplementedError("Реализуйте Settings.__init__")
+        for key, value in options.items():
+            setattr(self, key, value)
 
     def get(self, key, default=None):
-        raise NotImplementedError("Реализуйте Settings.get")
+        return getattr(self, key, default)
 
 
 class Point:
@@ -86,13 +89,14 @@ class Point:
     """
 
     def __init__(self, x, y):
-        raise NotImplementedError("Реализуйте Point.__init__")
+        self.x = x
+        self.y = y
 
     def distance_to(self, other):
-        raise NotImplementedError("Реализуйте Point.distance_to")
+        return ((self.x - other.x) ** 2 + (self.y - other.y) ** 2) ** 0.5
 
     def __repr__(self):
-        raise NotImplementedError("Реализуйте Point.__repr__")
+        return f"Point(x={self.x}, y={self.y})"
 
 
 class Money:
@@ -110,10 +114,13 @@ class Money:
     """
 
     def __init__(self, amount, currency):
-        raise NotImplementedError("Реализуйте Money.__init__")
+        self.amount = amount
+        self.currency = currency
 
     def __eq__(self, other):
-        raise NotImplementedError("Реализуйте Money.__eq__")
+        if not isinstance(other, Money):
+            return False
+        return self.amount == other.amount and self.currency == other.currency
 
 
 class Vector:
@@ -133,13 +140,14 @@ class Vector:
     """
 
     def __init__(self, x, y):
-        raise NotImplementedError("Реализуйте Vector.__init__")
+        self.x = x
+        self.y = y
 
     def __add__(self, other):
-        raise NotImplementedError("Реализуйте Vector.__add__")
+        return Vector(self.x + other.x, self.y + other.y)
 
     def __mul__(self, scalar):
-        raise NotImplementedError("Реализуйте Vector.__mul__")
+        return Vector(self.x * scalar, self.y * scalar)
 
     def magnitude(self):
-        raise NotImplementedError("Реализуйте Vector.magnitude")
+        return (self.x ** 2 + self.y ** 2) ** 0.5
