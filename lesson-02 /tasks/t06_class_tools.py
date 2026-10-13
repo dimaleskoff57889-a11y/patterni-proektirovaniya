@@ -1,5 +1,7 @@
 """Тема 6. Инструменты класса: classmethod, staticmethod, property, магические методы."""
 
+import math
+
 
 class MathUtils:
     """Задание 31. Статические методы.
@@ -19,11 +21,11 @@ class MathUtils:
 
     @staticmethod
     def is_even(n):
-        raise NotImplementedError("Реализуйте MathUtils.is_even")
+        return n % 2 == 0
 
     @staticmethod
     def celsius_to_fahrenheit(c):
-        raise NotImplementedError("Реализуйте MathUtils.celsius_to_fahrenheit")
+        return c * 9 / 5 + 32
 
 
 class Date:
@@ -42,11 +44,14 @@ class Date:
     """
 
     def __init__(self, year, month, day):
-        raise NotImplementedError("Реализуйте Date.__init__")
+        self.year = year
+        self.month = month
+        self.day = day
 
     @classmethod
     def from_string(cls, text):
-        raise NotImplementedError("Реализуйте Date.from_string")
+        year, month, day = text.split("-")
+        return cls(int(year), int(month), int(day))
 
 
 class Temperature:
@@ -66,11 +71,11 @@ class Temperature:
     """
 
     def __init__(self, celsius):
-        raise NotImplementedError("Реализуйте Temperature.__init__")
+        self.celsius = celsius
 
     @property
     def fahrenheit(self):
-        raise NotImplementedError("Реализуйте Temperature.fahrenheit")
+        return self.celsius * 9 / 5 + 32
 
 
 class Account:
@@ -93,18 +98,24 @@ class Account:
     """
 
     def __init__(self, owner, balance=0):
-        raise NotImplementedError("Реализуйте Account.__init__")
+        self.owner = owner
+        self._balance = 0
+        self.balance = balance
 
     @property
     def balance(self):
-        raise NotImplementedError("Реализуйте геттер Account.balance")
+        return self._balance
 
     @balance.setter
     def balance(self, value):
-        raise NotImplementedError("Реализуйте сеттер Account.balance")
+        if value < 0:
+            raise ValueError("Баланс не может быть отрицательным")
+        self._balance = value
 
     def deposit(self, amount):
-        raise NotImplementedError("Реализуйте Account.deposit")
+        if amount < 0:
+            raise ValueError("Сумма пополнения не может быть отрицательным числом")
+        self._balance += amount
 
 
 class Circle:
@@ -124,15 +135,15 @@ class Circle:
     """
 
     def __init__(self, radius):
-        raise NotImplementedError("Реализуйте Circle.__init__")
+        self.radius = radius
 
     @property
     def area(self):
-        raise NotImplementedError("Реализуйте Circle.area")
+        return math.pi * self.radius ** 2
 
     @property
     def perimeter(self):
-        raise NotImplementedError("Реализуйте Circle.perimeter")
+        return 2 * math.pi * self.radius
 
 
 class Numbers:
@@ -162,23 +173,24 @@ class Numbers:
     MULTIPLIER = 3.5
 
     def __init__(self, x, y):
-        raise NotImplementedError("Реализуйте Numbers.__init__")
+        self.x = x
+        self.y = y
 
     def add(self):
-        raise NotImplementedError("Реализуйте Numbers.add")
+        return self.x + self.y
 
     @classmethod
     def multiply(cls, a):
-        raise NotImplementedError("Реализуйте Numbers.multiply")
+        return a * cls.MULTIPLIER
 
     @staticmethod
     def subtract(b, c):
-        raise NotImplementedError("Реализуйте Numbers.subtract")
+        return b - c
 
     @property
     def value(self):
-        raise NotImplementedError("Реализуйте Numbers.value")
+        return (self.x, self.y)
 
     @value.setter
     def value(self, pair):
-        raise NotImplementedError("Реализуйте сеттер Numbers.value")
+        self.x, self.y = pair
