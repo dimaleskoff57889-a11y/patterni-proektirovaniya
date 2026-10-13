@@ -30,7 +30,12 @@ def hw_02(n):
         hw_02(7) == 13
         hw_02(10) == 55
     """
-    raise NotImplementedError("Реализуйте hw_02")
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    
+    return hw_02(n - 1) + hw_02(n - 2)
 
 
 def hw_03(tag, *items, sep=", "):

@@ -26,10 +26,6 @@ class Employee:
         name, age, role = text.split(";")
         return cls(name, int(age), role)
 
-    @classmethod
-    def from_string(cls, text):
-        raise NotImplementedError("Реализуйте Employee.from_string")
-
 
 class Password:
     """Задание 19. Свойство-маска и проверка надёжности.
