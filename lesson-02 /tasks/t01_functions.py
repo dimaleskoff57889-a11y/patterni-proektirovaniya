@@ -13,7 +13,7 @@ def task_01(base, exponent=2):
         task_01(5, exponent=0) == 1
         task_01(-2, 3) == -8
     """
-    raise NotImplementedError("Реализуйте task_01")
+    return base ** exponent
 
 
 def task_02(numbers):
@@ -26,7 +26,7 @@ def task_02(numbers):
         task_02([1, 2, 3, 4]) == (1, 4, 2.5)
         task_02([5]) == (5, 5, 5.0)
     """
-    raise NotImplementedError("Реализуйте task_02")
+    return (min(numbers), max(numbers), sum(numbers) / len(numbers))
 
 
 def task_03(n):
@@ -40,7 +40,9 @@ def task_03(n):
         task_03(0) == 0
         task_03(10) == 55
     """
-    raise NotImplementedError("Реализуйте task_03")
+    if n == 0:
+        return 0
+    return n + task_03(n - 1)
 
 
 def task_04(item, items=None):
@@ -57,7 +59,9 @@ def task_04(item, items=None):
         task_04("b", ["a"]) == ["a", "b"]
         src = ["a"]; task_04("b", src); src == ["a"]  # вход не изменился
     """
-    raise NotImplementedError("Реализуйте task_04")
+    result = [] if items is None else list(items)
+    result.append(item)
+    return result
 
 
 def task_05(name, *, greeting="Привет", punctuation="!"):
@@ -72,7 +76,7 @@ def task_05(name, *, greeting="Привет", punctuation="!"):
         task_05("Ольга", greeting="Салют", punctuation="?") == "Салют, Ольга?"
         task_05("А", "Б")  # TypeError: позиционно передавать нельзя
     """
-    raise NotImplementedError("Реализуйте task_05")
+    return f"{greeting}, {name}{punctuation}"
 
 
 def task_06(func, value):
@@ -86,4 +90,4 @@ def task_06(func, value):
         task_06(lambda s: s + "!", "привет") == "привет!!"
         task_06(str.strip, "  x  ") == "x"
     """
-    raise NotImplementedError("Реализуйте task_06")
+    return func(func(value))
