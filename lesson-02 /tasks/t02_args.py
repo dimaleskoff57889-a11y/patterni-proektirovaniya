@@ -13,7 +13,10 @@ def task_07(*args):
         task_07() == 1
         task_07(2, 0.5) == 1.0
     """
-    raise NotImplementedError("Реализуйте task_07")
+    result = 1
+    for a in args:
+        result *= a
+    return result
 
 
 def task_08(**kwargs):
@@ -27,7 +30,7 @@ def task_08(**kwargs):
         task_08() == ""
         task_08(name="Иван", age=30) == "age=30; name=Иван"
     """
-    raise NotImplementedError("Реализуйте task_08")
+    return "; ".join(f"{k}={v}" for k, v in sorted(kwargs.items()))
 
 
 def task_09(func, args, kwargs):
@@ -41,7 +44,7 @@ def task_09(func, args, kwargs):
         task_09(f, (1, 2), {"c": 3}) == 6
         task_09(max, ([1, 5, 3],), {}) == 5
     """
-    raise NotImplementedError("Реализуйте task_09")
+    return func(*args, **kwargs)
 
 
 def task_10(words):
@@ -55,7 +58,7 @@ def task_10(words):
         task_10(["кот", "а", "бык", "я"]) == ["а", "я", "бык", "кот"]
         task_10(["банан", "яблоко", "абрикос"]) == ["банан", "яблоко", "абрикос"]
     """
-    raise NotImplementedError("Реализуйте task_10")
+    return sorted(words, key=lambda w: (len(w), w))
 
 
 def task_11(numbers):
@@ -69,7 +72,7 @@ def task_11(numbers):
         task_11([1, 3]) == []
         task_11([]) == []
     """
-    raise NotImplementedError("Реализуйте task_11")
+    return list(map(lambda x: x ** 2, filter(lambda x: x % 2 == 0, numbers)))
 
 
 def task_12(f, g):
@@ -81,4 +84,4 @@ def task_12(f, g):
         task_12(lambda x: x * 2, lambda x: x + 1)(3) == 8   # 2 * (3 + 1)
         task_12(str.upper, str.strip)("  hi  ") == "HI"
     """
-    raise NotImplementedError("Реализуйте task_12")
+    return lambda x: f(g(x))
