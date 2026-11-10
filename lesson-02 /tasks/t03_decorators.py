@@ -1,5 +1,10 @@
 """Тема 3. Замыкания и декораторы."""
 
+from decimal import Decimal
+from functools import wraps
+from itertools import chain
+from numbers import Real
+
 
 def task_13(start=0):
     """Счётчик вызовов на замыкании.
@@ -14,7 +19,12 @@ def task_13(start=0):
         c10 = task_13(10)
         c10() == 11; c10() == 12
     """
-    raise NotImplementedError("Реализуйте task_13")
+    def counter():
+        nonlocal start
+        start += 1
+        return start
+
+    return counter
 
 
 def task_14(func):
@@ -34,7 +44,13 @@ def task_14(func):
         double(3) == 6
         double.calls == 2
     """
-    raise NotImplementedError("Реализуйте task_14")
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        wrapper.calls += 1
+        return func(*args, **kwargs)
+
+    wrapper.calls = 0
+    return wrapper
 
 
 def task_15(func):
@@ -54,7 +70,12 @@ def task_15(func):
 
         add(1, 2) == 3
     """
-    raise NotImplementedError("Реализуйте task_15")
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return result.upper() if isinstance(result, str) else result
+
+    return wrapper
 
 
 def task_16(func):
@@ -77,7 +98,19 @@ def task_16(func):
         fast(3) == 9
         calls == [2, 3]
     """
-    raise NotImplementedError("Реализуйте task_16")
+    cache = []
+
+    @wraps(func)
+    def wrapper(*args):
+        for cached_args, result in cache:
+            if args == cached_args:
+                return result
+
+        result = func(*args)
+        cache.append((args, result))
+        return result
+
+    return wrapper
 
 
 def task_17(func):
@@ -96,7 +129,14 @@ def task_17(func):
         sub(10, -4)  # ValueError ... неотрицательными ...
         sub(a=1, b=-2)  # ValueError
     """
-    raise NotImplementedError("Реализуйте task_17")
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        for value in chain(args, kwargs.values()):
+            if isinstance(value, (Real, Decimal)) and value < 0:
+                raise ValueError("Аргументы должны быть неотрицательными")
+        return func(*args, **kwargs)
+
+    return wrapper
 
 
 def task_18(times):
@@ -117,4 +157,11 @@ def task_18(times):
 
         nothing() == []
     """
-    raise NotImplementedError("Реализуйте task_18")
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            return [func(*args, **kwargs) for _ in range(times)]
+
+        return wrapper
+
+    return decorator
