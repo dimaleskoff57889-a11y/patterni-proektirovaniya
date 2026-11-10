@@ -121,8 +121,8 @@ def task_05(method):
         task_05("delete") == "delete: обработан"
         task_05("patch") == "неизвестный метод"
     """
-    handled = {"get", "post", "put", "delete"}
-    return f"{method}: обработан" if method in handled else "неизвестный метод"
+    responses = {name: f"{name}: обработан" for name in ("get", "post", "put", "delete")}
+    return responses.get(method, "неизвестный метод")
 
 
 class AppConfig:

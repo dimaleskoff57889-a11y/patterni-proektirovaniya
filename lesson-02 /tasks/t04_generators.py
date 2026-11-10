@@ -16,7 +16,8 @@ def task_19(n):
         # следующий next(g) возбуждает StopIteration
         list(task_19(0)) == []
     """
-    raise NotImplementedError("Реализуйте task_19")
+    for number in range(1, n + 1):
+        yield 2 * number
 
 
 def task_20(n):
@@ -29,7 +30,7 @@ def task_20(n):
         list(task_20(3)) == [3, 2, 1, 0]
         list(task_20(0)) == [0]
     """
-    raise NotImplementedError("Реализуйте task_20")
+    yield from range(n, -1, -1)
 
 
 def task_21(n):
@@ -45,7 +46,7 @@ def task_21(n):
         next(g) == 9
         # следующий next(g) возбуждает StopIteration
     """
-    raise NotImplementedError("Реализуйте task_21")
+    return (number ** 2 for number in range(1, n + 1))
 
 
 def task_22():
