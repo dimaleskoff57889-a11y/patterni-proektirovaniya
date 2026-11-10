@@ -1,0 +1,14 @@
+/*
+!/.gitignore
+!/lesson-*/
+
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.vscode/
+.idea/
+*.code-workspace
+
+/lesson-01/lesson-01/
